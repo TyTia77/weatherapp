@@ -15,13 +15,13 @@
 
     <body ng-app="weather" ng-controller="mainCtrl">
         <div class="container-fluid main">
-            
+
             <div class="row location-text">
                 <p class="col-xs-offset-2 col-xs-8 text-center">{{data.city}}</p>
             </div>
 
-            <div class="row weather-icon">
-                <img class="col-xs-offset-2 col-xs-8 text-center" src="http://openweathermap.org/img/w/{{icon}}.png" alt="">
+            <div class="col-xs-offset-2 col-xs-8 text-center row weather-icon">
+                <img src="http://openweathermap.org/img/w/{{icon}}.png" alt="">
                 <!-- <i class="col-xs-offset-2 col-xs-8 text-center fa fa-cloud fa-5x clouds" aria-hidden="true"></i> -->
             </div>
 

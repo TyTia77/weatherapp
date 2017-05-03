@@ -25,23 +25,8 @@ app.factory('weatherApi', ['$http', function($http){
 }]);
 
 app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi){
-    var location = '';
     $scope.data = {};
     getLocation();
-
-
-    console.log('loca', location);
-    if(!location){
-        getLocation();
-    } else{
-        weatherApi.getWeather(location).then(function(a){
-            console.log(JSON.stringify(a, null, 2));
-            $scope.data.temp = Math.floor(a.data.main.temp);
-            $scope.data.weather = a.data.weather[0].description;
-            $scope.icon = a.data.weather[0].icon;
-            $scope.data.city = a.data.name;
-        }).catch(handleErr);
-    }
 
     function handleErr(err){
         console.log(err);
@@ -49,14 +34,17 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
 
     function getLocation(){
         navigator.geolocation ? navigator.geolocation.getCurrentPosition(getPosition)
-                                       : alert('notworking');
+                                       : console.log('notworking');
     }
 
     function getPosition(position){
-        console.log('getlocation');
-        location = 'lat=' +position.coords.latitude +'&lon=' +position.coords.longitude;
-        $scope.lat = position.coords.latitude;
-        $scope.long = position.coords.longitude;
-        // $scope.$apply();
+        var location = 'lat=' +position.coords.latitude +'&lon=' +position.coords.longitude;
+        weatherApi.getWeather(location).then(function(a){
+            console.log(JSON.stringify(a, null, 2));
+            $scope.data.temp = Math.floor(a.data.main.temp);
+            $scope.data.weather = a.data.weather[0].description;
+            $scope.icon = a.data.weather[0].icon;
+            $scope.data.city = a.data.name;
+        }).catch(handleErr);
     }
 }]);
