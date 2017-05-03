@@ -28,6 +28,9 @@ html, body{
     font-size: 6em;
 }
 
+img{
+    width: 150px!important;
+}
 
 .clouds{
     color: lightgrey;

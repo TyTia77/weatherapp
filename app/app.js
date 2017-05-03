@@ -29,23 +29,19 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
     $scope.data = {};
     getLocation();
 
-    weatherApi.getUserLocation().then(function(data){
-        var location = '';
-        for (var d in data.data){
-            if (d === 'city') location += data.data[d] +', ';
-            if (d === 'country') location += data.data[d];
-        }
 
-        // $scope.data.city = location;
-        console.log($scope.data)
-        console.log(data);
-
+    console.log('loca', location);
+    if(!location){
+        getLocation();
+    } else{
         weatherApi.getWeather(location).then(function(a){
             console.log(JSON.stringify(a, null, 2));
             $scope.data.temp = Math.floor(a.data.main.temp);
             $scope.data.weather = a.data.weather[0].description;
+            $scope.icon = a.data.weather[0].icon;
+            $scope.data.city = a.data.name;
         }).catch(handleErr);
-    }).catch(handleErr);
+    }
 
     function handleErr(err){
         console.log(err);
@@ -53,14 +49,14 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
 
     function getLocation(){
         navigator.geolocation ? navigator.geolocation.getCurrentPosition(getPosition)
-                                       : $scope.test = 'not supported'
+                                       : alert('notworking');
     }
 
     function getPosition(position){
-        lat=35&lon=139
-        location += 'lat=' +position.coords.latitude; +'&lon=' +position.coords.longitude;
+        console.log('getlocation');
+        location = 'lat=' +position.coords.latitude +'&lon=' +position.coords.longitude;
         $scope.lat = position.coords.latitude;
         $scope.long = position.coords.longitude;
-        $scope.$apply();
+        // $scope.$apply();
     }
 }]);
