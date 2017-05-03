@@ -4,11 +4,11 @@ app.factory('weatherApi', ['$http', function($http){
     var obj = {};
 
     obj.getUserLocation = function() {
-        return $http.get("http://ipinfo.io/json");
+        return $http.get("https://cors-anywhere.herokuapp.com/http://ipinfo.io/json");
     };
 
     obj.getWeather = function(city){
-        var api = "http://api.openweathermap.org/data/2.5/weather?q=";
+        var api = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=";
         var units = "&units=metric";
         var appid = "&APPID=061f24cf3cde2f60644a8240302983f2";
 
