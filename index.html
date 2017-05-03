@@ -5,8 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Weather</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
+    <script src="https://use.fontawesome.com/89e76766d0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="./app/app.js"></script>
 </head>
-<body>
 
-</body>
+    <body ng-app="weather" ng-controller="mainCtrl">
+        <div class="container-fluid main">
+            <div class="row location-text">
+                <p class="col-xs-offset-2 col-xs-8 text-center">{{data.city}}</p>
+            </div>
+
+            <div class="row weather-icon">
+                <i class="col-xs-offset-2 col-xs-8 text-center fa fa-cloud fa-5x clouds" aria-hidden="true"></i>
+            </div>
+
+            <div class="row weather-text">
+                <h2 class="col-xs-offset-2 col-xs-8 text-center" >{{data.weather}}</h2>
+            </div>
+
+            <div class="row temp-text">
+                <h1 class="col-xs-offset-2 col-xs-8 text-center">{{data.temp}}&#176;<span style="color: #0262B6">C</span></h1>
+            </div>
+
+            <div class="row">
+
+            </div>
+
+        </div>
+    </body>
 </html>

@@ -1,0 +1,35 @@
+html, body{
+    /*position: relative;*/
+    padding: 0;
+    margin: 0;
+    /*border: 1px solid red;*/
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    font-family: 'Baloo', cursive;
+    font-size: 16px;
+}
+
+.main{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.location-text > p{
+    font-size: 2em;
+}
+
+.weather-text{
+    font-size: 3em;
+}
+
+.temp-text h1{
+    font-size: 6em;
+}
+
+
+.clouds{
+    color: lightgrey;
+    font-size: 90px!important;
+}
