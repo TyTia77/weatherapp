@@ -34,11 +34,15 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
 
     function getLocation(){
         navigator.geolocation ? navigator.geolocation.getCurrentPosition(getPosition)
-                                       : console.log('notworking');
+                              : weatherApi.getUserLocation().then(function(a){
+                                   console.log(a);
+                                  var temp = a.data.loc.split(',');
+                                  var location = 'lat=' +temp[0] +'&lon=' +temp[1];
+                                  getWeather(location);
+                              });
     }
 
-    function getPosition(position){
-        var location = 'lat=' +position.coords.latitude +'&lon=' +position.coords.longitude;
+    function getWeather(location){
         weatherApi.getWeather(location).then(function(a){
             console.log(JSON.stringify(a, null, 2));
             $scope.data.temp = Math.floor(a.data.main.temp);
@@ -46,5 +50,10 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
             $scope.icon = a.data.weather[0].icon;
             $scope.data.city = a.data.name;
         }).catch(handleErr);
+    }
+
+    function getPosition(position){
+        var location = 'lat=' +position.coords.latitude +'&lon=' +position.coords.longitude;
+        getWeather(location);
     }
 }]);
