@@ -2,20 +2,22 @@ var app = angular.module('weather', []);
 
 app.factory('weatherApi', ['$http', function($http){
     var obj = {};
+    var cors = 'https://cors-anywhere.herokuapp.com/';
 
     obj.getUserLocation = function() {
-        return $http.get("https://cors-anywhere.herokuapp.com/http://ipinfo.io/json");
+        return $http.get("http://ipinfo.io/json");
     };
 
     obj.getWeather = function(city){
-        var api = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=";
+        // var api = "http://api.openweathermap.org/data/2.5/weather?q=";
+        var api = "http://api.openweathermap.org/data/2.5/weather?";
         var units = "&units=metric";
         var appid = "&APPID=061f24cf3cde2f60644a8240302983f2";
 
         // api = type ? api : api.slice(0, api.length -2);
 
         console.log(api);
-        return $http.get(api +city +units +appid);
+        return $http.get(cors +api +city +units +appid);
     };
 
     return obj;
@@ -23,8 +25,7 @@ app.factory('weatherApi', ['$http', function($http){
 }]);
 
 app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi){
-    $scope.lat = '';
-    $scope.long = '';
+    var location = '';
     $scope.data = {};
     getLocation();
 
@@ -35,7 +36,7 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
             if (d === 'country') location += data.data[d];
         }
 
-        $scope.data.city = location;
+        // $scope.data.city = location;
         console.log($scope.data)
         console.log(data);
 
@@ -56,6 +57,8 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
     }
 
     function getPosition(position){
+        lat=35&lon=139
+        location += 'lat=' +position.coords.latitude; +'&lon=' +position.coords.longitude;
         $scope.lat = position.coords.latitude;
         $scope.long = position.coords.longitude;
         $scope.$apply();
