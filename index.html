@@ -14,8 +14,14 @@
 </head>
 
     <body ng-app="weather" ng-controller="mainCtrl">
-        <div class="container-fluid main">
-
+        <div class="spin-container" ng-show="!ready">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+        <div class="container-fluid main" ng-show="ready">
             <div class="row location-text">
                 <p class="col-xs-offset-2 col-xs-8 text-center">{{data.city}}</p>
             </div>
@@ -31,11 +37,6 @@
             <div class="row temp-text">
                 <h1 class="col-xs-offset-2 col-xs-8 text-center">{{data.temp}}&#176;<span style="color: #0262B6">C</span></h1>
             </div>
-
-            <div class="row">
-
-            </div>
-
         </div>
     </body>
 </html>
