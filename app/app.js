@@ -9,18 +9,21 @@ app.factory('weatherApi', ['$http', function($http){
     };
 
     obj.getWeather = function(city){
-        var api = "http://api.openweathermap.org/data/2.5/weather?";
+        var api = "http://api.openweathermap.org/data/2.5/forecast/daily?";
         var units = "&units=metric";
         var appid = "&APPID=061f24cf3cde2f60644a8240302983f2";
+        var days = "&cnt=5";
 
-        return $http.get(cors +api +city +units +appid);
+        return $http.get(cors +api +city +units +appid +days);
     };
-    
+
     return obj;
 }]);
 
 app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi){
     $scope.data = {};
+    getDateTime();
+
     getLocation();
 
     function handleErr(err){
@@ -40,10 +43,11 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
 
     function getWeather(location){
         weatherApi.getWeather(location).then(function(a){
-            $scope.data.temp = Math.floor(a.data.main.temp);
-            $scope.data.weather = a.data.weather[0].description;
-            setIcon(a.data.weather[0].description);
-            $scope.data.city = a.data.name;
+            console.log(a.data);
+            $scope.data.temp = Math.floor(a.data.list[0].temp.day);
+            $scope.data.weather = a.data.list[0].weather[0].description;
+            setIcon(a.data.list[0].weather[0].description);
+            $scope.data.city = a.data.city.name;
             $scope.ready = true;
         }).catch(handleErr);
     }
@@ -64,7 +68,7 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
     var temp;
     var svg = '.svg';
         switch(weather){
-            case 'clear sky':
+            case 'sky is clear':
                 temp = 'day';
                 break;
 
@@ -96,5 +100,22 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
         }
 
         $scope.iconLink = url +temp +svg;
+    }
+
+    function getDateTime(){
+        var test = new Date();
+
+        var day = test.getDay();
+        var month = test.getMonth();
+        var year = test.getFullYear();
+        var date = day +'/' +month +'/' +year;
+
+        var hour = test.getHours();
+        var min = test.getMinutes();
+        var time = hour +':' +min;
+
+
+        console.log('date', date);
+        console.log('time', time);
     }
 }]);

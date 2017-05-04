@@ -1,44 +1,127 @@
 html, body{
-    /*position: relative;*/
     padding: 0;
     margin: 0;
-    /*border: 1px solid red;*/
     height: 100vh;
     width: 100vw;
+    min-width: 0px!important;
     overflow: hidden;
     font-family: 'Baloo', cursive;
     font-size: 16px;
-    /*background-color: grey;*/
 }
 
 .main{
     position: relative;
+    border: 1px solid red;
+    height: 100%;
     top: 50%;
     transform: translateY(-50%);
 }
 
+.city{
+    text-align: right;
+}
+
+.date{
+    display: inline-block;
+}
+
 .location-text > p{
-    font-size: 2em;
+    font-size: 1.2em;
+    padding: 5px;
+    height: 100%;
+    background-color: lightgrey;
+}
+
+.fore{
+    background-color: lightgrey;
+    border-right: 1px solid grey;
+    text-align: center;
+    padding: 0;
+}
+
+.fore-icon{
+    font-weight: bolder;
+    font-size: 50px;
+    padding: 0;
+}
+
+.fore:last-child{
+    border-right: none;
 }
 
 .weather-text{
-    font-size: 3em;
+    padding: 0 10px;
 }
 
-.temp-text h1{
-    font-size: 6em;
+.weather-icon{
+    display: inline-block;
+    position: relative;
+    top: 30px;
+    font-size: 80px;
+    transform: scale(2.5, 2.5);
+
+    text-align: center;
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+}
+
+.temp-text{
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    font-size: 80px;
+    text-align: right;
 }
 
 img{
-    width: 120px!important;
-    transform: scale(2, 2);
-    margin: 0 auto;
+    /*width: 120px!important;*/
+    height: 50%;
+    width: 50%;
+    /*transform: scale(2.2, 2.2);*/
+    /*margin: 0 auto;*/
+    /*max-width: 200px;*/
 }
 
 .clouds{
     color: lightgrey;
-    font-size: 90px!important;
+    /*font-size: 90px!important;*/
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .spin-container{
     display: block;
@@ -64,7 +147,6 @@ img{
   height: 18px;
   background-color: #333;
   background-color: #fff;
-
   border-radius: 100%;
   display: inline-block;
   -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
