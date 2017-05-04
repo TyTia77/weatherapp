@@ -33,13 +33,16 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
     }
 
     function getLocation(){
-        navigator.geolocation ? navigator.geolocation.getCurrentPosition(getPosition)
-                              : weatherApi.getUserLocation().then(function(a){
-                                   console.log(a);
-                                  var temp = a.data.loc.split(',');
-                                  var location = 'lat=' +temp[0] +'&lon=' +temp[1];
-                                  getWeather(location);
-                              });
+        if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(getPosition)
+        } else{
+            weatherApi.getUserLocation().then(function(a){
+                 console.log(a);
+                var temp = a.data.loc.split(',');
+                var location = 'lat=' +temp[0] +'&lon=' +temp[1];
+                getWeather(location);
+            });
+        }
     }
 
     function getWeather(location){
@@ -47,6 +50,7 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
             console.log(JSON.stringify(a, null, 2));
             $scope.data.temp = Math.floor(a.data.main.temp);
             $scope.data.weather = a.data.weather[0].description;
+            setIcon(a.data.weather[0].description);
             $scope.icon = a.data.weather[0].icon;
             $scope.data.city = a.data.name;
         }).catch(handleErr);
@@ -55,5 +59,43 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
     function getPosition(position){
         var location = 'lat=' +position.coords.latitude +'&lon=' +position.coords.longitude;
         getWeather(location);
+    }
+
+    function setIcon(weather){
+    var url = 'icons/animated/';
+    var temp;
+    var svg = '.svg';
+        switch(weather){
+            case 'clear sky':
+                temp = 'day';
+                break;
+
+            case 'few clouds':
+            case 'scattered clouds':
+            case 'broken clouds':
+                temp = 'cloudy';
+
+            case 'shower rain':
+                temp = 'rainy-6';
+                break;
+
+            case 'rain':
+                temp = 'rainy-7';
+                break;
+
+            case 'thunderstorm':
+                temp = 'thunder';
+                break;
+
+            case 'snow':
+                temp = 'snowy-6';
+                break;
+
+            case 'mist':
+                temp = 'cloudy';
+                break;
+        }
+
+        $scope.iconLink = url +temp +svg;
     }
 }]);
