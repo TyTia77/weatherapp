@@ -24,7 +24,7 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
     $scope.data = {};
     $scope.temp = {};
     $scope.location = {};
-    getDateTime();
+    $iconLink = setIcon('rain');
 
     getLocation();
 
@@ -44,44 +44,35 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
     }
 
     function getWeather(location){
-        weatherApi.getWeather(location).then(function(a){
-            console.log(a.data);
+        weatherApi.getWeather(location).then(function(data){
+            console.log(data.data);
+            $scope.location.today = {};
+            $scope.location.forecast = [];
 
-            $scope.temp = a.data;
-            $scope.location.today.city = a.data.city.name;
-            $scope.location.today.country = a.data.city.country;
-
-            for(var i = 0; i < a.data.list.length; i++){
+            for(var i = 0; i < data.data.list.length; i++){
                 if (i === 0){
+                    $scope.location.today ={
+                        date: getDateTime(i),
+                        temp: mapTemp(data.data.list[i].temp),
+                        city: data.data.city.name,
+                        country: data.data.city.country
+                    };
                     $scope.location.today.weather = {
-                        name: a.data.list[i].weather[i].main,
-                        description: a.data.list[i].weather[i].description
+                        name: data.data.list[i].weather[i].main,
+                        description: data.data.list[i].weather[i].description
                     };
-                    $scope.location.today.temp = a.data.list[i].temp;
                 } else {
-                    // $scope.location.forecast[i-1] = {
-                    //     temp: a.data.list[i].temp,
-                    //     weather: {
-                    //         name: a.data.list[i].weather[0].main,
-                    //         description:  a.data.list[i].weather[0].description
-                    //     }
-                    // };
-                    $scope.location.forecast[i-1].temp = a.data.list[i].temp;
-                    $scope.location.forecast[i-1].weather = {
-                            name: a.data.list[i].weather[0].main,
-                            description:  a.data.list[i].weather[0].description
-                    };
+                    $scope.location.forecast.push({
+                        day: getDateTime(i),
+                        temp: mapTemp(data.data.list[i].temp),
+                        weather: {
+                            name: data.data.list[i].weather[0].main,
+                            description:  data.data.list[i].weather[0].description
+                        }
+                    });
                 }
             }
 
-
-            console.log($scope.location);
-
-
-            $scope.data.temp = Math.floor(a.data.list[0].temp.day);
-            $scope.data.weather = a.data.list[0].weather[0].description;
-            setIcon(a.data.list[0].weather[0].description);
-            $scope.data.city = a.data.city.name;
             $scope.ready = true;
         }).catch(handleErr);
     }
@@ -136,7 +127,9 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
         $scope.iconLink = url +temp +svg;
     }
 
-    function getDateTime(){
+    // day will tell us what day we want,
+    // 0 for today 1 for tomor etc
+    function getDateTime(day){
         var dayarr = [
             'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday',
             'saturaday'
@@ -146,25 +139,27 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
             'january', 'feburary', 'march', 'april', 'may', 'june',
             'july', 'august', 'september', 'november', 'december'
         ];
-        
-        var today = new Date();
 
-        var day = today.getDay();
-        var month = today.getMonth();
-        var year = today.getFullYear();
-        var date = day +'/' +month +'/' +year;
+        var Today = new Date();
+        var today = Today.getDay();
+        var month = Today.getMonth();
+        var year = Today.getFullYear();
 
-        var hour = today.getHours();
-        var min = today.getMinutes();
-        var time = hour +':' +min;
-
-        $scope.location.today = {};
-        $scope.location.forecast = [];
-        $scope.location.today.date = dayarr[day]+' ' +montharr[month] +' ' +year;
-
-        for (var i = 0; i < 4; i++){
-            $scope.location.forecast.push({day: dayarr[getDay(day, i +1)].slice(0, 3)});
+        if (day === 0){
+            return dayarr[getDay(today, day)] +' ' +montharr[month] +' ' +year;
+        } else {
+            return dayarr[getDay(today, day)].slice(0, 3);
         }
+    }
+
+    // accepts object of floating temp values,
+    // returns values rounded down eg 17.34 to 17
+    function mapTemp(arr){
+        Object.keys(arr).map(function(temp){
+             arr[temp] = Math.floor(arr[temp]);
+        });
+
+        return arr;
     }
 
     function getDay(today, nextday){

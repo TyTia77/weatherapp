@@ -15,6 +15,7 @@
 </head>
 
     <body ng-app="weather" ng-controller="mainCtrl">
+
         <div class="spin-container" ng-show="!ready">
             <div class="spinner">
                 <div class="bounce1"></div>
@@ -22,8 +23,6 @@
                 <div class="bounce3"></div>
             </div>
         </div>
-
-
 
         <div class="container-fluid main" ng-show="ready">
             <div class="row location-text">
@@ -37,7 +36,7 @@
                     <i class="ion-ios-cloud-outline weather-icon"></i>
                 </span>
                 <span class="col-xs-6 col-sm-12">
-                    <p class="temp-text">{{location.today.temp.day}}&#176;
+                    <p class="temp-text cold">{{location.today.temp.day}}&#176;
                         <!-- <span style="color: #0262B6">C</span> -->
                     </p>
                 </span>
@@ -51,8 +50,8 @@
                 <span class="col-xs-3 fore" ng-repeat="fore in location.forecast">
                     <i class="ion-ios-partlysunny-outline fore-icon"></i>
                     <div class="day">{{fore.day}}</div>
-                    <div class="temp-high">{{fore.temp.max}}&#176;</div>
-                    <div class="temp-low">{{fore.temp.min}}&#176;</div>
+                    <div class="temp-high hot">{{fore.temp.max}}&#176;</div>
+                    <div class="temp-low cold">{{fore.temp.min}}&#176;</div>
                 </span>
                 <!-- <span class="col-xs-3 fore">
                     <i class="ion-ios-partlysunny-outline fore-icon"></i>

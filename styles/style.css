@@ -3,8 +3,8 @@ html, body{
     margin: 0;
     height: 100vh;
     width: 100vw;
-    /*max-width: 500px;*/
-    min-width: 320px!important;
+    min-width: 320px;
+    min-height: 480px;
     overflow: hidden;
     font-family: 'Baloo', cursive;
     font-size: 16px;
@@ -28,6 +28,13 @@ html, body{
 
 .date{
     display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.location-text{
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .location-text > p{
@@ -79,6 +86,7 @@ html, body{
     width: 100%;
     font-size: 80px;
     text-align: right;
+    color: #2980B9;
 }
 
 img{
@@ -95,12 +103,11 @@ img{
     /*font-size: 90px!important;*/
 }
 
-.temp-high{
-    color: red;
+.cold{
+    color: #2980B9;
 }
-
-.temp-low{
-    color: #0262B6;
+.hot{
+    color: #D35400;
 }
 
 .day{
