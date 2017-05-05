@@ -22,6 +22,8 @@ app.factory('weatherApi', ['$http', function($http){
 
 app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi){
     $scope.data = {};
+    $scope.temp = {};
+    $scope.location = {};
     getDateTime();
 
     getLocation();
@@ -44,6 +46,36 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
     function getWeather(location){
         weatherApi.getWeather(location).then(function(a){
             console.log(a.data);
+
+            $scope.temp = a.data;
+            $scope.location.today = {};
+            $scope.location.today.city = a.data.city.name;
+            $scope.location.today.country = a.data.city.country;
+            $scope.location.forecast = [];
+
+            for(var i = 0; i < a.data.list.length; i++){
+                if (i === 0){
+                    $scope.location.today.weather = {
+                        name: a.data.list[i].weather[i].main,
+                        description: a.data.list[i].weather[i].description
+                    };
+                    $scope.location.today.temp = a.data.list[i].temp;
+                } else {
+                    console.log('party');
+                    $scope.location.forecast.push({
+                        temp: a.data.list[i].temp,
+                        weather: {
+                            name: a.data.list[i].weather[0].main,
+                            description:  a.data.list[i].weather[0].description
+                        }
+                    });
+                }
+            }
+
+
+            console.log($scope.location);
+
+
             $scope.data.temp = Math.floor(a.data.list[0].temp.day);
             $scope.data.weather = a.data.list[0].weather[0].description;
             setIcon(a.data.list[0].weather[0].description);

@@ -28,7 +28,7 @@
         <div class="container-fluid main" ng-show="ready">
             <div class="row location-text">
                 <p class="col-xs-6 col-lg-12 date">{{date}}</p>
-                <p class="col-xs-6 col-lg-12 city">{{data.city}}</p>
+                <p class="col-xs-6 col-lg-12 city">{{location.today.city}}</p>
             </div>
 
             <div class="row color">
@@ -37,19 +37,24 @@
                     <i class="ion-ios-cloud-outline weather-icon"></i>
                 </span>
                 <span class="col-xs-6 col-sm-12">
-                    <p class="temp-text">{{data.temp}}&#176;
+                    <p class="temp-text">{{location.today.temp.day}}&#176;
                         <!-- <span style="color: #0262B6">C</span> -->
                     </p>
                 </span>
             </div>
 
             <div class="row ">
-                <h2 class="col-xs-12 weather-text">{{data.weather}}</h2>
+                <h2 class="col-xs-12 weather-text">{{location.today.weather.description}}</h2>
             </div>
 
             <div class="row">
-                <span class="col-xs-3 fore">
-                    <!-- <img class="icon" src=""></img> -->
+                <span class="col-xs-3 fore" ng-repeat="fore in location.forecast">
+                    <i class="ion-ios-partlysunny-outline fore-icon"></i>
+                    <div class="day">day here</div>
+                    <div class="temp-high">{{fore.temp.max}}&#176;</div>
+                    <div class="temp-low">{{fore.temp.min}}&#176;</div>
+                </span>
+                <!-- <span class="col-xs-3 fore">
                     <i class="ion-ios-partlysunny-outline fore-icon"></i>
                     <div class="day">Mon</div>
                     <div class="temp-high">temp high</div>
@@ -72,7 +77,7 @@
                     <div class="day">Thu</div>
                     <div class="temp-high">temp high</div>
                     <div class="temp-low">temp low</div>
-                </span>
+                </span> -->
             </div>
 
             <div class="row">
