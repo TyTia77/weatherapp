@@ -27,16 +27,16 @@
 
         <div class="container-fluid main" ng-show="ready">
             <div class="row location-text">
-                <p class="col-xs-6 date">date goes here</p>
-                <p class="col-xs-6 city">{{data.city}}</p>
+                <p class="col-xs-6 col-lg-12 date">{{date}}</p>
+                <p class="col-xs-6 col-lg-12 city">{{data.city}}</p>
             </div>
 
-            <div class="row">
-                <span class="col-xs-6">
+            <div class="row color">
+                <span class="col-xs-6 col-sm-12">
                     <!-- <img class="weather-icon" src="{{iconLink}}" alt="weather icon"> -->
                     <i class="ion-ios-cloud-outline weather-icon"></i>
                 </span>
-                <span class="col-xs-6">
+                <span class="col-xs-6 col-sm-12">
                     <p class="temp-text">{{data.temp}}&#176;
                         <!-- <span style="color: #0262B6">C</span> -->
                     </p>

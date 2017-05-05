@@ -103,6 +103,10 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
     }
 
     function getDateTime(){
+        var dayarr = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday',
+        'saturaday'];
+        var montharr = ['january', 'feburary', 'march', 'april', 'may', 'june',
+        'july', 'august', 'september', 'november', 'december'];
         var test = new Date();
 
         var day = test.getDay();
@@ -114,8 +118,9 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
         var min = test.getMinutes();
         var time = hour +':' +min;
 
-
         console.log('date', date);
         console.log('time', time);
+
+        $scope.date = dayarr[day]+' ' +montharr[month] +' ' +year;
     }
 }]);
