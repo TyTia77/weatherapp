@@ -48,10 +48,8 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
             console.log(a.data);
 
             $scope.temp = a.data;
-            $scope.location.today = {};
             $scope.location.today.city = a.data.city.name;
             $scope.location.today.country = a.data.city.country;
-            $scope.location.forecast = [];
 
             for(var i = 0; i < a.data.list.length; i++){
                 if (i === 0){
@@ -61,14 +59,18 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
                     };
                     $scope.location.today.temp = a.data.list[i].temp;
                 } else {
-                    console.log('party');
-                    $scope.location.forecast.push({
-                        temp: a.data.list[i].temp,
-                        weather: {
+                    // $scope.location.forecast[i-1] = {
+                    //     temp: a.data.list[i].temp,
+                    //     weather: {
+                    //         name: a.data.list[i].weather[0].main,
+                    //         description:  a.data.list[i].weather[0].description
+                    //     }
+                    // };
+                    $scope.location.forecast[i-1].temp = a.data.list[i].temp;
+                    $scope.location.forecast[i-1].weather = {
                             name: a.data.list[i].weather[0].main,
                             description:  a.data.list[i].weather[0].description
-                        }
-                    });
+                    };
                 }
             }
 
@@ -135,24 +137,42 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
     }
 
     function getDateTime(){
-        var dayarr = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday',
-        'saturaday'];
-        var montharr = ['january', 'feburary', 'march', 'april', 'may', 'june',
-        'july', 'august', 'september', 'november', 'december'];
-        var test = new Date();
+        var dayarr = [
+            'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday',
+            'saturaday'
+        ];
 
-        var day = test.getDay();
-        var month = test.getMonth();
-        var year = test.getFullYear();
+        var montharr = [
+            'january', 'feburary', 'march', 'april', 'may', 'june',
+            'july', 'august', 'september', 'november', 'december'
+        ];
+        
+        var today = new Date();
+
+        var day = today.getDay();
+        var month = today.getMonth();
+        var year = today.getFullYear();
         var date = day +'/' +month +'/' +year;
 
-        var hour = test.getHours();
-        var min = test.getMinutes();
+        var hour = today.getHours();
+        var min = today.getMinutes();
         var time = hour +':' +min;
 
-        console.log('date', date);
-        console.log('time', time);
+        $scope.location.today = {};
+        $scope.location.forecast = [];
+        $scope.location.today.date = dayarr[day]+' ' +montharr[month] +' ' +year;
 
-        $scope.date = dayarr[day]+' ' +montharr[month] +' ' +year;
+        for (var i = 0; i < 4; i++){
+            $scope.location.forecast.push({day: dayarr[getDay(day, i +1)].slice(0, 3)});
+        }
+    }
+
+    function getDay(today, nextday){
+        var total =  today + nextday;
+        if (total > 6){
+            return total - 7;
+        } else {
+            return total;
+        }
     }
 }]);

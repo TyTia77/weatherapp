@@ -27,7 +27,7 @@
 
         <div class="container-fluid main" ng-show="ready">
             <div class="row location-text">
-                <p class="col-xs-6 col-lg-12 date">{{date}}</p>
+                <p class="col-xs-6 col-lg-12 date">{{location.today.date}}</p>
                 <p class="col-xs-6 col-lg-12 city">{{location.today.city}}</p>
             </div>
 
@@ -50,7 +50,7 @@
             <div class="row">
                 <span class="col-xs-3 fore" ng-repeat="fore in location.forecast">
                     <i class="ion-ios-partlysunny-outline fore-icon"></i>
-                    <div class="day">day here</div>
+                    <div class="day">{{fore.day}}</div>
                     <div class="temp-high">{{fore.temp.max}}&#176;</div>
                     <div class="temp-low">{{fore.temp.min}}&#176;</div>
                 </span>
