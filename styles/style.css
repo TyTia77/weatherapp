@@ -33,6 +33,7 @@ html, body{
     text-overflow: ellipsis;
 }
 .location-text{
+    background-color: #0262B6;
     overflow: hidden;
     white-space: nowrap;
 }
@@ -42,7 +43,8 @@ html, body{
     padding: 5px;
     height: 100%;
     text-transform: capitalize;
-    background-color: #ededed;
+    background-color: #0262B6;
+    color: white;
 }
 
 .fore{
@@ -75,15 +77,15 @@ html, body{
 
 
 .weather-text{
-    padding: 0 10px;
-    text-align: right;
+    /*padding: 0 10px;*/
+    text-align: center;
 }
 
 .weather-icon{
     display: inline-block;
     position: relative;
-    padding-left: 10px;
-    /*top: 30px;*/
+    /*padding-left: 10px;*/
+    top: 30px;
     font-size: 80px;
     transform: scale(2.3, 2.3);
 
@@ -97,8 +99,8 @@ html, body{
     display: inline-block;
     height: 100%;
     width: 100%;
-    font-size: 80px;
-    text-align: right;
+    font-size: 90px;
+    text-align: center;
     /*color: #2980B9;*/
 }
 
