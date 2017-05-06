@@ -35,10 +35,9 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
         if (navigator.geolocation){
             navigator.geolocation.getCurrentPosition(getPosition, function(err){
                 console.log(err);
-            }, {timeout: 10000});
+            });
         } else{
             weatherApi.getUserLocation().then(function(a){
-                console.log('maybe not');
                 var temp = a.data.loc.split(',');
                 getWeather(temp);
             });
@@ -94,8 +93,6 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
 
     function setIcon(weather){
     var temp;
-
-    console.log(weather);
 
         switch(weather){
             case 'Clear':
@@ -167,6 +164,8 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
         return arr;
     }
 
+    // return the correct index corresponding to
+    // the day 0 for sunday 6 for saturday
     function getDay(today, nextday){
         var total =  today + nextday;
         if (total > 6){

@@ -13,7 +13,6 @@ html, body{
 
 .main{
     position: relative;
-    /*border: 1px solid red;*/
     height: 100%;
     top: 50%;
     transform: translateY(-50%);
@@ -21,10 +20,6 @@ html, body{
 
 .city{
     text-align: right;
-}
-.color{
-    /*color: white;*/
-    /*background-color: #0262B6;*/
 }
 
 .date{
@@ -71,24 +66,19 @@ html, body{
 .fore-icon{
     font-weight: bolder;
     font-size: 70px;
-    padding: 0;
 }
 
-
-
 .weather-text{
-    /*padding: 0 10px;*/
-    text-align: center;
-    font-size: 1.2em;
     position: relative;
     top: -20px;
+    text-align: center;
+    font-size: 1.2em;
 }
 
 .weather-icon{
     display: inline-block;
     position: relative;
-    /*padding-left: 10px;*/
-    top: 30px;
+    top: 20px;
     font-size: 80px;
     transform: scale(2.3, 2.3);
 
@@ -99,26 +89,8 @@ html, body{
 }
 
 .temp-text{
-    display: inline-block;
-    /*height: 70%!important;*/
-    width: 100%;
     font-size: 90px;
     text-align: center;
-    /*color: #2980B9;*/
-}
-
-img{
-    /*width: 120px!important;*/
-    height: 50%;
-    width: 50%;
-    /*transform: scale(2.2, 2.2);*/
-    /*margin: 0 auto;*/
-    /*max-width: 200px;*/
-}
-
-.clouds{
-    color: lightgrey;
-    /*font-size: 90px!important;*/
 }
 
 .cold{
@@ -143,21 +115,7 @@ img{
 }
 
 
-@media screen and (min-width: 1200px){
-    .weather-text{
-        text-align: center;
-        margin-top: 0;
-    }
 
-    .date, .city{
-        text-align: center;
-        background-color: white!important;
-    }
-
-    .city{
-        font-size: 40px!important;
-    }
-}
 
 
 
