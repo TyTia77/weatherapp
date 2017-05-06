@@ -143,7 +143,7 @@ img{
 }
 
 
-/*@media screen and (min-width: 1200px){
+@media screen and (min-width: 1200px){
     .weather-text{
         text-align: center;
         margin-top: 0;
@@ -157,7 +157,7 @@ img{
     .city{
         font-size: 40px!important;
     }
-}*/
+}
 
 
 

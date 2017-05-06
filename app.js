@@ -5,7 +5,7 @@ app.factory('weatherApi', ['$http', function($http){
     var cors = 'https://cors-anywhere.herokuapp.com/';
 
     obj.getUserLocation = function() {
-        return $http.get("http://ipinfo.io/json");
+        return $http.get("https://ipinfo.io/json");
     };
 
     obj.getWeather = function(city){
@@ -24,7 +24,6 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
     $scope.data = {};
     $scope.temp = {};
     $scope.location = {};
-    $iconLink = setIcon('rain');
 
     getLocation();
 
@@ -34,9 +33,12 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
 
     function getLocation(){
         if (navigator.geolocation){
-            navigator.geolocation.getCurrentPosition(getPosition);
+            navigator.geolocation.getCurrentPosition(getPosition, function(err){
+                console.log(err);
+            }, {timeout: 10000});
         } else{
             weatherApi.getUserLocation().then(function(a){
+                console.log('maybe not');
                 var temp = a.data.loc.split(',');
                 getWeather(temp);
             });
@@ -45,7 +47,7 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
 
     function getWeather(location){
         weatherApi.getWeather(location).then(function(data){
-            console.log(data.data);
+            console.log(data);
             $scope.location.today = {};
             $scope.location.forecast = [];
 
@@ -91,43 +93,43 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
     }
 
     function setIcon(weather){
-    var url = 'icons/animated/';
     var temp;
-    var svg = '.svg';
+
     console.log(weather);
+
         switch(weather){
             case 'Clear':
-                temp = 'day';
+                temp = 'ion-ios-sunny-outline';
                 break;
 
             case 'few clouds':
+                temp = 'ion-ios-partlysunny-outline';
+                break;
+
             case 'scattered clouds':
             case 'broken clouds':
             case 'mist':
-                temp = 'cloudy';
+                temp = 'ion-ios-cloud-outline';
                 break;
 
             case 'shower rain':
-                temp = 'rainy-6';
-                break;
-
             case 'Rain':
-                temp = 'rainy-7';
+                temp = 'ion-ios-rainy-outline';
                 break;
 
             case 'thunderstorm':
-                temp = 'thunder';
+                temp = 'ion-ios-thunderstorm-outline';
                 break;
 
             case 'snow':
-                temp = 'snowy-6';
+                temp = 'ion-ios-snowy';
                 break;
 
             default:
                 console.log('not found');
         }
 
-        return url +temp +svg;
+        return temp;
     }
 
     // day will tell us what day we want,

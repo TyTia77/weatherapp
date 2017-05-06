@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Weather</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
     <script src="https://use.fontawesome.com/89e76766d0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
-    <script src="./app/app.js"></script>
+    <script src="app.js"></script>
 </head>
 
     <body ng-app="weather" ng-controller="mainCtrl">
@@ -26,57 +26,32 @@
 
         <div class="container-fluid main" ng-show="ready">
             <div class="row location-text">
-                <p class="col-xs-6 col-lg-12 date">{{location.today.date}}</p>
-                <p class="col-xs-6 col-lg-12 city">{{location.today.city}}</p>
+                <p class="col-xs-6 date">{{location.today.date}}</p>
+                <p class="col-xs-6 city">{{location.today.city}}</p>
             </div>
 
             <div class="row color" style="background-color: #0262B6; color: white;">
-                <span class="col-xs-12 col-sm-12 text-center">
-                    <!-- <img class="weather-icon" src="{{location.today.icon}}" alt="weather icon"> -->
-                    <i class="ion-ios-cloud-outline weather-icon"></i>
+                <span class="col-xs-12 text-center">
+                    <i class="weather-icon {{location.today.icon}}"></i>
                 </span>
-                <span class="col-xs-12 col-sm-12">
+                <span class="col-xs-12">
                     <p class="temp-text">{{location.today.temp.day}}&#176;C
                     </p>
                 </span>
                 <div class="col-xs-12 weather-text">{{location.today.weather.description}}</div>
-
             </div>
 
-
-
             <div class="row" >
-                <span class="col-xs-3 fore" ng-repeat="fore in location.forecast" style="background-color: #f3f3f3; color: black;">
-                    <i class="ion-ios-partlysunny-outline fore-icon"></i>
-                    <!-- <img class="fore-icon" src="{{fore.icon}}" alt="weather icon"> -->
+                <span
+                    class="col-xs-3 fore"
+                    ng-repeat="fore in location.forecast"
+                    style="background-color: #f3f3f3; color: black;">
+
+                    <i class="fore-icon {{fore.icon}}"></i>
                     <div class="day">{{fore.day}}</div>
                     <div class="temp-high hot">{{fore.temp.max}}&#176;</div>
                     <div class="temp-low cold">{{fore.temp.min}}&#176;</div>
                 </span>
-                <!-- <span class="col-xs-3 fore">
-                    <i class="ion-ios-partlysunny-outline fore-icon"></i>
-                    <div class="day">Mon</div>
-                    <div class="temp-high">temp high</div>
-                    <div class="temp-low">temp low</div>
-                </span>
-                <span class="col-xs-3 fore">
-                    <i class="ion-ios-sunny-outline fore-icon"></i>
-                    <div class="day">Tue</div>
-                    <div class="temp-high">temp high</div>
-                    <div class="temp-low">temp low</div>
-                </span>
-                <span class="col-xs-3 fore">
-                    <i class="ion-ios-rainy-outline fore-icon"></i>
-                    <div class="day">Wed</div>
-                    <div class="temp-high">temp high</div>
-                    <div class="temp-low">temp low</div>
-                </span>
-                <span class="col-xs-3 fore">
-                    <i class="ion-ios-thunderstorm-outline fore-icon"></i>
-                    <div class="day">Thu</div>
-                    <div class="temp-high">temp high</div>
-                    <div class="temp-low">temp low</div>
-                </span> -->
             </div>
 
             <div class="row">
