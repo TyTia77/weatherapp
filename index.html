@@ -32,11 +32,11 @@
 
             <div class="row color">
                 <span class="col-xs-6 col-sm-12">
-                    <!-- <img class="weather-icon" src="{{iconLink}}" alt="weather icon"> -->
-                    <i class="ion-ios-cloud-outline weather-icon"></i>
+                    <img class="weather-icon" src="{{location.today.icon}}" alt="weather icon">
+                    <!-- <i class="ion-ios-cloud-outline weather-icon"></i> -->
                 </span>
                 <span class="col-xs-6 col-sm-12">
-                    <p class="temp-text cold">{{location.today.temp.day}}&#176;
+                    <p class="temp-text">{{location.today.temp.day}}&#176;
                         <!-- <span style="color: #0262B6">C</span> -->
                     </p>
                 </span>
@@ -48,7 +48,8 @@
 
             <div class="row">
                 <span class="col-xs-3 fore" ng-repeat="fore in location.forecast">
-                    <i class="ion-ios-partlysunny-outline fore-icon"></i>
+                    <!-- <i class="ion-ios-partlysunny-outline fore-icon"></i> -->
+                    <img class="fore-icon" src="{{fore.icon}}" alt="weather icon">
                     <div class="day">{{fore.day}}</div>
                     <div class="temp-high hot">{{fore.temp.max}}&#176;</div>
                     <div class="temp-low cold">{{fore.temp.min}}&#176;</div>

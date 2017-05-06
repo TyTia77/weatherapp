@@ -55,7 +55,8 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
                         date: getDateTime(i),
                         temp: mapTemp(data.data.list[i].temp),
                         city: data.data.city.name,
-                        country: data.data.city.country
+                        country: data.data.city.country,
+                        icon: setIcon(data.data.list[i].weather[0].main)
                     };
                     $scope.location.today.weather = {
                         name: data.data.list[i].weather[i].main,
@@ -63,6 +64,7 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
                     };
                 } else {
                     $scope.location.forecast.push({
+                        icon: setIcon(data.data.list[i].weather[0].main),
                         day: getDateTime(i),
                         temp: mapTemp(data.data.list[i].temp),
                         weather: {
@@ -92,8 +94,9 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
     var url = 'icons/animated/';
     var temp;
     var svg = '.svg';
+    console.log(weather);
         switch(weather){
-            case 'sky is clear':
+            case 'Clear':
                 temp = 'day';
                 break;
 
@@ -108,7 +111,7 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
                 temp = 'rainy-6';
                 break;
 
-            case 'rain':
+            case 'Rain':
                 temp = 'rainy-7';
                 break;
 
@@ -124,7 +127,7 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
                 console.log('not found');
         }
 
-        $scope.iconLink = url +temp +svg;
+        return url +temp +svg;
     }
 
     // day will tell us what day we want,
@@ -146,7 +149,7 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
         var year = Today.getFullYear();
 
         if (day === 0){
-            return dayarr[getDay(today, day)] +' ' +montharr[month] +' ' +year;
+            return dayarr[getDay(today, day)].slice(0, 3) +', ' +montharr[month] +' ' +year;
         } else {
             return dayarr[getDay(today, day)].slice(0, 3);
         }

@@ -46,31 +46,44 @@ html, body{
 }
 
 .fore{
+    position: relative;
     background-color: #ededed;
-    border-right: 1px solid grey;
     text-align: center;
     padding: 0;
+}
+
+.fore::after{
+    content: '';
+    position: absolute;
+    transform: translate(-50%, -105%);
+    height: 90%;
+    width: 100%;
+    border-right: 1px solid #d3d3d3;
+}
+
+.fore:last-child::after{
+    border-right: none;
 }
 
 .fore-icon{
     font-weight: bolder;
     font-size: 50px;
+    transform: scale(1.5, 1.5);
     padding: 0;
 }
 
-.fore:last-child{
-    border-right: none;
-}
+
 
 .weather-text{
     padding: 0 10px;
+    text-align: right;
 }
 
 .weather-icon{
     display: inline-block;
     position: relative;
     padding-left: 10px;
-    top: 30px;
+    /*top: 30px;*/
     font-size: 80px;
     transform: scale(2.3, 2.3);
 
@@ -86,7 +99,7 @@ html, body{
     width: 100%;
     font-size: 80px;
     text-align: right;
-    color: #2980B9;
+    /*color: #2980B9;*/
 }
 
 img{
