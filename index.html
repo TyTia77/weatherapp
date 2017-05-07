@@ -25,20 +25,20 @@
         </div>
 
         <div class="container-fluid main" ng-show="ready">
-            <div class="row location-text">
-                <p class="col-xs-6 date">{{location.today.date}}</p>
-                <p class="col-xs-6 city">{{location.today.city}}</p>
-            </div>
+            <header class="row location-text">
+                <p class="col-xs-6 col-sm-12 header-date">{{location.today.date}}</p>
+                <p class="col-xs-6 col-sm-12 header-city">{{location.today.city}}</p>
+            </header>
 
             <div class="row color" style="background-color: #0262B6; color: white;">
                 <span class="col-xs-12 text-center">
-                    <i class="weather-icon {{location.today.icon}}"></i>
+                    <i class="today-icon {{location.today.icon}}"></i>
                 </span>
                 <span class="col-xs-12">
-                    <p class="temp-text">{{location.today.temp.day}}&#176;C
+                    <p class="today-temp">{{location.today.temp.day}}&#176;C
                     </p>
                 </span>
-                <div class="col-xs-12 weather-text">{{location.today.weather.description}}</div>
+                <div class="col-xs-12 today-weather">{{location.today.weather.description}}</div>
             </div>
 
             <div class="row" >
@@ -48,9 +48,9 @@
                     style="background-color: #f3f3f3; color: black;">
 
                     <i class="fore-icon {{fore.icon}}"></i>
-                    <div class="day">{{fore.day}}</div>
-                    <div class="temp-high hot">{{fore.temp.max}}&#176;</div>
-                    <div class="temp-low cold">{{fore.temp.min}}&#176;</div>
+                    <div class="fore-day">{{fore.day}}</div>
+                    <div class="fore-temp-high hot">{{fore.temp.max}}&#176;</div>
+                    <div class="fore-temp-low cold">{{fore.temp.min}}&#176;</div>
                 </span>
             </div>
             <div class="visible-xs more-info-container">
