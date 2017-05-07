@@ -58,9 +58,9 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
                         city: data.data.city.name,
                         country: data.data.city.country,
                         clouds: data.data.list[i].clouds,
-                        humidity: data.data.list[i].humidity,
-                        pressure: data.data.list[i].pressure,
-                        wind: data.data.list[i].speed,
+                        humidity: roundNearest(data.data.list[i].humidity / 2),
+                        pressure: roundNearest(data.data.list[i].pressure),
+                        wind: roundNearest(data.data.list[i].speed),
                         icon: setIcon(data.data.list[i].weather[0].main)
                     };
                     $scope.location.today.weather = {
@@ -166,6 +166,10 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
         });
 
         return arr;
+    }
+
+    function roundNearest(value){
+        return Math.round(value);
     }
 
     // return the correct index corresponding to
