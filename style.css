@@ -119,7 +119,7 @@ body::-webkit-scrollbar{
     text-align: center;
     margin: 0 auto;
     height: 100%;
-    width: 100%;
+    /*width: 100%;*/
 }
 
 .temp-text{
