@@ -53,9 +53,28 @@
                     <div class="temp-low cold">{{fore.temp.min}}&#176;</div>
                 </span>
             </div>
-
-            <div class="row">
-                <!-- <p class="text-center">more details</p> -->
+            <div class="visible-xs more-info-container">
+                <div class="row col-xs-12 text-center more-info-description">
+                    currently {{location.today.weather.name}} in {{location.today.city}}.
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 left">
+                        pressure:<br>
+                        humidity:<br>
+                        chance of rain:<br>
+                        min temp:<br>
+                        max temp:<br>
+                        wind:
+                    </div>
+                    <div class="col-xs-6 right">
+                        {{location.today.pressure}} hPa<br>
+                        {{location.today.humidity}} %<br>
+                        {{location.today.clouds}} %<br>
+                        {{location.today.temp.min}} &#176;<br>
+                        {{location.today.temp.max}} &#176;<br>
+                        {{location.today.wind}} km
+                    </div>
+                </div>
             </div>
         </div>
     </body>

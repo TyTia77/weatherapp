@@ -57,6 +57,10 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
                         temp: mapTemp(data.data.list[i].temp),
                         city: data.data.city.name,
                         country: data.data.city.country,
+                        clouds: data.data.list[i].clouds,
+                        humidity: data.data.list[i].humidity,
+                        pressure: data.data.list[i].pressure,
+                        wind: data.data.list[i].speed,
                         icon: setIcon(data.data.list[i].weather[0].main)
                     };
                     $scope.location.today.weather = {
@@ -75,7 +79,7 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
                     });
                 }
             }
-
+            console.log($scope.location)
             $scope.ready = true;
         }).catch(handleErr);
     }
