@@ -1,40 +1,20 @@
 html, body{
-    padding: 0;
-    margin: 0;
     height: 100vh;
     width: 100vw;
+    min-width: 320px;
+    padding: 0;
+    margin: 0;
     overflow-x: hidden;
     overflow-y: scroll;
     font-family: 'Baloo', cursive;
     font-size: 16px;
     background-color: #0262B6;
-
      -ms-overflow-style: none;
-     /*-moz-scrollbar: none;*/
 }
 
 /*scrollbars*/
 body::-webkit-scrollbar{
     display: none;
-}
-
-.more-info-container{
-    padding: 20px 0;
-    color: white;
-    font-size: 1.2em;
-}
-.more-info-description{
-    width: 100vw;
-}
-
-.more-info-container .row:last-of-type{
-    position: relative;
-    top: 20px;
-    padding-bottom: 20px;
-}
-
-.left{
-    text-align: right;
 }
 
 .main{
@@ -44,6 +24,8 @@ body::-webkit-scrollbar{
     padding-top: 5px;
     min-width: 320px;
     min-height: 480px;
+    max-width: 1680px;
+    max-height: 1050px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -65,7 +47,7 @@ body::-webkit-scrollbar{
     white-space: nowrap;
 }
 
-.location-text > p{
+.location-text p{
     font-size: 1.2em;
     padding: 5px;
     height: 100%;
@@ -96,7 +78,7 @@ body::-webkit-scrollbar{
 
 .fore-icon{
     font-weight: bolder;
-    font-size: 70px;
+    font-size: 3.5em;
 }
 
 .today-weather{
@@ -109,19 +91,17 @@ body::-webkit-scrollbar{
 .today-icon{
     display: inline-block;
     position: relative;
-    overflow: hidden;
     top: 20px;
-    font-size: 80px;
-    transform: scale(2.3, 2.3);
-
-    text-align: center;
-    margin: 0 auto;
     height: 100%;
-    /*width: 100%;*/
+    margin: 0 auto;
+    overflow: hidden;
+    font-size: 5em;
+    transform: scale(2.3, 2.3);
+    text-align: center;
 }
 
 .today-temp{
-    font-size: 90px;
+    font-size: 5.5em;
     text-align: center;
 }
 
@@ -140,11 +120,26 @@ body::-webkit-scrollbar{
     text-transform: capitalize;
 }
 
-@media screen and (min-width: 480px){
-    .more-info-container{
-        /*font-size: 1.4em;*/
-    }
+.more-info-container{
+    padding: 20px 0;
+    color: white;
+    font-size: 1.2em;
+}
+.more-info-description{
+    width: 100vw;
+}
 
+.more-info-container .row:last-of-type{
+    position: relative;
+    top: 20px;
+    padding-bottom: 20px;
+}
+
+.left{
+    text-align: right;
+}
+
+@media screen and (min-width: 480px){
     .location-text > p{
         font-size: 1.3em;
     }
@@ -185,49 +180,22 @@ body::-webkit-scrollbar{
         text-align: center;
     }
 
+    .header-city{
+        position: relative;
+        top: -10px;
+    }
+
+    .today-icon{
+        position: relative;
+        top: 40px;
+    }
+
     .header-date, .header-city{
         text-align: center;
     }
 }
 
-/*@media screen and (min-height: 800px){
-    .more-info-container{
-        font-size: 1.3em;
-    }
-}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*animations*/
 .spin-container{
     display: block;
     height: 100%;
