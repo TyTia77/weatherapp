@@ -110,6 +110,7 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
             case 'scattered clouds':
             case 'broken clouds':
             case 'mist':
+            case 'Clouds':
                 temp = 'ion-ios-cloud-outline';
                 break;
 
