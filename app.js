@@ -52,9 +52,6 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
             $scope.location.today = {};
             $scope.location.forecast = [];
 
-            console.log(list);
-            console.log(city);
-
             list.forEach(function(value, index){
                 if (!index){
 
