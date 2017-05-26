@@ -113,10 +113,12 @@ body::-webkit-scrollbar{
 }
 .fore-day, .fore-temp-high, .fore-temp-low{
     position: relative;
-    top: -20px;
+    top: -10px;
 }
 
 .fore-day{
+    position: relative;
+    top: 5px;
     text-transform: capitalize;
 }
 
