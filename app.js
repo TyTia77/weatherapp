@@ -46,40 +46,52 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
 
     function getWeather(location){
         weatherApi.getWeather(location).then(function(data){
-            console.log(data);
+
+            var city = data.data.city;
+            var list = data.data.list;
             $scope.location.today = {};
             $scope.location.forecast = [];
 
-            for(var i = 0; i < data.data.list.length; i++){
-                if (i === 0){
-                    $scope.location.today ={
-                        date: getDateTime(i),
-                        temp: mapTemp(data.data.list[i].temp),
-                        city: data.data.city.name,
-                        country: data.data.city.country,
-                        clouds: data.data.list[i].clouds,
-                        humidity: roundNearest(data.data.list[i].humidity / 2),
-                        pressure: roundNearest(data.data.list[i].pressure),
-                        wind: roundNearest(data.data.list[i].speed),
-                        icon: setIcon(data.data.list[i].weather[0].main)
-                    };
+            console.log(list);
+            console.log(city);
+
+            list.forEach(function(value, index){
+                if (!index){
+
+                    $scope.location.today = {
+                        date: getDateTime(index),
+                        temp: mapTemp(value.temp),
+                        city: city.name,
+                        country: city.country,
+                        clouds: value.clouds,
+                        humidity: roundNearest(value.humidity),
+                        pressure: roundNearest(value.pressure),
+                        wind: roundNearest(value.speed),
+                        icon: setIcon(value.weather[0].main)
+                    }
+
                     $scope.location.today.weather = {
-                        name: data.data.list[i].weather[i].main,
-                        description: data.data.list[i].weather[i].description
-                    };
+                        name: value.weather[0].main,
+                        description: value.weather[0].description
+                    }
+
                 } else {
+
                     $scope.location.forecast.push({
-                        icon: setIcon(data.data.list[i].weather[0].main),
-                        day: getDateTime(i),
-                        temp: mapTemp(data.data.list[i].temp),
+                        icon: setIcon(value.weather[0].main),
+                        day: getDateTime(index),
+                        temp: mapTemp(value.temp),
                         weather: {
-                            name: data.data.list[i].weather[0].main,
-                            description:  data.data.list[i].weather[0].description
+                            name: value.weather[0].main,
+                            description:  value.weather[0].description
                         }
                     });
+
                 }
-            }
-            console.log($scope.location)
+            });
+
+
+
             $scope.ready = true;
         }).catch(handleErr);
     }
@@ -96,41 +108,16 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
     }
 
     function setIcon(weather){
-    var temp;
 
-        switch(weather){
-            case 'Clear':
-                temp = 'ion-ios-sunny-outline';
-                break;
-
-            case 'few clouds':
-                temp = 'ion-ios-partlysunny-outline';
-                break;
-
-            case 'scattered clouds':
-            case 'broken clouds':
-            case 'mist':
-                temp = 'ion-ios-cloud-outline';
-                break;
-
-            case 'shower rain':
-            case 'Rain':
-                temp = 'ion-ios-rainy-outline';
-                break;
-
-            case 'thunderstorm':
-                temp = 'ion-ios-thunderstorm-outline';
-                break;
-
-            case 'snow':
-                temp = 'ion-ios-snowy';
-                break;
-
-            default:
-                console.log('not found');
+        var icon = {
+            Clear: 'ion-ios-sunny-outline',
+            Clouds: 'ion-ios-cloudy-outline',
+            Rain: 'ion-ios-rainy-outline',
+            thunderstorm: 'ion-ios-thunderstorm-outline',
+            snow: 'ion-ios-snowy'
         }
 
-        return temp;
+        return icon[weather];
     }
 
     // day will tell us what day we want,
@@ -151,7 +138,7 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
         var month = Today.getMonth();
         var year = Today.getFullYear();
 
-        if (day === 0){
+        if (!day){
             return dayarr[getDay(today, day)].slice(0, 3) +', ' +montharr[month] +' ' +year;
         } else {
             return dayarr[getDay(today, day)].slice(0, 3);
@@ -161,10 +148,13 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
     // accepts object of floating temp values,
     // returns values rounded down eg 17.34 to 17
     function mapTemp(arr){
-        Object.keys(arr).map(function(temp){
-             arr[temp] = Math.floor(arr[temp]);
-        });
+        Object
+            .keys(arr)
+            .map(function(temp){
+                 arr[temp] = Math.floor(arr[temp]);
+            });
 
+        // returns an object
         return arr;
     }
 
@@ -176,10 +166,6 @@ app.controller('mainCtrl', ['$scope', 'weatherApi', function($scope, weatherApi)
     // the day 0 for sunday 6 for saturday
     function getDay(today, nextday){
         var total =  today + nextday;
-        if (total > 6){
-            return total - 7;
-        } else {
-            return total;
-        }
+        return total > 6 ? total - 7 : total;
     }
 }]);
