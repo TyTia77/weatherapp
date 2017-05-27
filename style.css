@@ -91,12 +91,12 @@ body::-webkit-scrollbar{
 .today-icon{
     display: inline-block;
     position: relative;
-    top: 40px;
+    top: 25px;
     height: 100%;
     margin: 0 auto;
     overflow: hidden;
     font-size: 5em;
-    transform: scale(3.3, 3.3);
+    transform: scale(2.5, 2.5);
     text-align: center;
 }
 
