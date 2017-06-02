@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
-    <script src="app.js"></script>
+
 </head>
 
     <body ng-app="weather" ng-controller="mainCtrl">
@@ -25,7 +24,7 @@
 
         <div class="container-fluid main" ng-show="ready">
             <header class="row location-text">
-                <p class="col-xs-6 col-sm-12 header-date">{{location.today.date}}</p>
+                <p class="col-xs-6 visible-xs header-date">{{location.today.date}}</p>
                 <p class="col-xs-6 col-sm-12 header-city">{{location.today.city}}</p>
             </header>
 
@@ -43,16 +42,15 @@
             <div class="row" >
                 <span
                     class="col-xs-3 fore"
-                    ng-repeat="fore in location.forecast"
-                    style="background-color: #f3f3f3; color: black;">
+                    ng-repeat="fore in location.forecast">
 
                     <div class="fore-day">{{fore.day}}</div>
                     <i class="fore-icon {{fore.icon}}"></i>
                     <div class="fore-temp-high hot">{{fore.temp.max}}&#176;</div>
-                    <div class="fore-temp-low cold">{{fore.temp.min}}&#176;</div>
+                    <div class="visible-xs fore-temp-low cold">{{fore.temp.min}}&#176;</div>
                 </span>
             </div>
-            <div class="more-info-container">
+            <div class="more-info-container visible-xs">
                 <!-- <div class="row col-xs-12 text-center more-info-description">
                     currently {{location.today.weather.name}} in {{location.today.city}}.
                 </div> -->
@@ -76,5 +74,7 @@
                 </div>
             </div>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+        <script src="app.js"></script>
     </body>
 </html>
