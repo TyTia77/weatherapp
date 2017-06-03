@@ -24,7 +24,6 @@ body::-webkit-scrollbar{
     padding-top: 5px;
     min-width: 320px;
     min-height: 480px;
-    /*max-width: 1680px;*/
     max-width: 768px;
     max-height: 1050px;
     top: 50%;
@@ -146,6 +145,10 @@ body::-webkit-scrollbar{
 }
 
 @media screen and (min-width: 768px){
+
+    .main{
+        max-height: 800px;
+    }
 
     .location-text > p{
         font-size: 1.7em;
